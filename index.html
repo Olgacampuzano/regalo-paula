@@ -127,8 +127,8 @@ p{margin:0}
     <h2 class="serif" style="font-size:24px">Feliz cumpleaños, mi amor</h2>
     <div class="ornament">♥</div>
     <div class="pol-row">
-      <figure class="polaroid" style="--r:-6deg"><div class="ph"><img src="fotos/atardecer.jpg" alt="" style="object-position:58% 70%" loading="lazy"></div><figcaption>nosotros</figcaption></figure>
-      <figure class="polaroid" style="--r:5deg"><div class="ph"><img src="fotos/noche.jpg" alt="" style="object-position:50% 40%" loading="lazy"></div><figcaption>tú y yo</figcaption></figure>
+      <figure class="polaroid" style="--r:-6deg"><div class="ph"><img src="atardecer.jpg" alt="" style="object-position:58% 70%" loading="lazy"></div><figcaption>nosotros</figcaption></figure>
+      <figure class="polaroid" style="--r:5deg"><div class="ph"><img src="noche.jpg" alt="" style="object-position:50% 40%" loading="lazy"></div><figcaption>tú y yo</figcaption></figure>
     </div>
     <p class="lead">Tienes un regalo esperándote, pero antes tienes que superar un test de 4 preguntas. Hay que acertarlas todas.</p>
     <button class="btn" id="start">Empezar el test</button>
@@ -166,8 +166,8 @@ p{margin:0}
     </div>
 
     <div class="pol-row fade" style="animation-delay:.05s">
-      <figure class="polaroid" style="--r:-5deg"><div class="ph"><img src="fotos/roig-arena.jpg" alt="" style="object-position:55% 72%" loading="lazy"></div><figcaption>nuestros planes</figcaption></figure>
-      <figure class="polaroid" style="--r:4deg"><div class="ph"><img src="fotos/flores.jpg" alt="" style="object-position:50% 68%" loading="lazy"></div><figcaption>para siempre</figcaption></figure>
+      <figure class="polaroid" style="--r:-5deg"><div class="ph"><img src="roig-arena.jpg" alt="" style="object-position:55% 72%" loading="lazy"></div><figcaption>nuestros planes</figcaption></figure>
+      <figure class="polaroid" style="--r:4deg"><div class="ph"><img src="flores.jpg" alt="" style="object-position:50% 68%" loading="lazy"></div><figcaption>para siempre</figcaption></figure>
     </div>
 
     <div class="stack">
@@ -289,10 +289,10 @@ p{margin:0}
       <p class="script">Nuestros momentos</p>
       <p class="mem-sub">y los que nos quedan por vivir</p>
       <div class="mem-grid">
-        <figure class="polaroid" style="--r:-4deg"><div class="ph"><img src="fotos/lisboa-monasterio.jpg" alt="" style="object-position:45% 50%" loading="lazy"></div><figcaption>Lisboa</figcaption></figure>
-        <figure class="polaroid" style="--r:3deg"><div class="ph"><img src="fotos/beso-mejilla.jpg" alt="" style="object-position:45% 40%" loading="lazy"></div><figcaption>mi persona</figcaption></figure>
-        <figure class="polaroid" style="--r:2deg"><div class="ph"><img src="fotos/navidad.jpg" alt="" style="object-position:50% 70%" loading="lazy"></div><figcaption>Navidad</figcaption></figure>
-        <figure class="polaroid" style="--r:-3deg"><div class="ph"><img src="fotos/espejo.jpg" alt="" style="object-position:50% 40%" loading="lazy"></div><figcaption>noches así</figcaption></figure>
+        <figure class="polaroid" style="--r:-4deg"><div class="ph"><img src="lisboa-monasterio.jpg" alt="" style="object-position:45% 50%" loading="lazy"></div><figcaption>Lisboa</figcaption></figure>
+        <figure class="polaroid" style="--r:3deg"><div class="ph"><img src="beso-mejilla.jpg" alt="" style="object-position:45% 40%" loading="lazy"></div><figcaption>mi persona</figcaption></figure>
+        <figure class="polaroid" style="--r:2deg"><div class="ph"><img src="navidad.jpg" alt="" style="object-position:50% 70%" loading="lazy"></div><figcaption>Navidad</figcaption></figure>
+        <figure class="polaroid" style="--r:-3deg"><div class="ph"><img src="espejo.jpg" alt="" style="object-position:50% 40%" loading="lazy"></div><figcaption>noches así</figcaption></figure>
       </div>
     </div>
 
@@ -302,7 +302,7 @@ p{margin:0}
     </div>
 
     <div class="card sign fade" style="animation-delay:.4s">
-      <figure class="polaroid" style="--r:-3deg;margin-bottom:22px"><div class="ph"><img src="fotos/pijamas.jpg" alt="" style="object-position:50% 38%" loading="lazy"></div><figcaption>te quiero</figcaption></figure>
+      <figure class="polaroid" style="--r:-3deg;margin-bottom:22px"><div class="ph"><img src="pijamas.jpg" alt="" style="object-position:50% 38%" loading="lazy"></div><figcaption>te quiero</figcaption></figure>
       <p>Feliz cumpleaños. Te quiero de aquí a la luna y volver, dándole la vuelta 100 veces.</p>
       <p class="script">Octa</p>
     </div>
@@ -333,7 +333,7 @@ function renderQ(){
   const item = QUESTIONS[i];
   $("progress").innerHTML = QUESTIONS.map((_,k)=>`<span class="${k<i?'done':''}">♥</span>`).join("");
   $("qpol").style.setProperty("--r", (i%2 ? 4 : -4) + "deg");
-  const qp = QUIZ_PHOTOS[i]; $("qph").innerHTML = qp ? `<img src="fotos/${qp[0]}.jpg" alt="" style="object-position:${qp[1]}">` : `<span>♥</span>`;
+  const qp = QUIZ_PHOTOS[i]; $("qph").innerHTML = qp ? `<img src="${qp[0]}.jpg" alt="" style="object-position:${qp[1]}">` : `<span>♥</span>`;
   $("qcap").textContent = item.cap;
   $("qnum").textContent = `Pregunta ${i+1} de ${QUESTIONS.length}`;
   $("question").textContent = item.q;
