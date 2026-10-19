@@ -25,6 +25,7 @@
   color-scheme: light;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:24px 56px;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 .petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .petal{position:absolute;top:-30px;width:14px;height:12px;background:var(--rose);border-radius:12px 0 12px 0;opacity:.5;animation:fall linear infinite}
@@ -103,6 +104,25 @@ p{margin:0}
 .choose .script{font-size:38px}
 .sign{margin-top:26px}
 .sign .script{font-size:46px;margin-top:2px}
+.date-pill{display:inline-block;margin-top:12px;background:var(--deep);color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;padding:8px 16px;border-radius:999px}
+.gal-wrap{position:relative;background:var(--blush)}
+.gal{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal img{flex:0 0 86%;max-width:none;width:86%;aspect-ratio:4/3;object-fit:cover;scroll-snap-align:center;display:block;background:var(--blush)}
+.gal img:only-child{flex-basis:100%;width:100%}
+.swipe{position:absolute;right:10px;bottom:10px;background:rgba(255,250,251,.9);color:var(--deep);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;pointer-events:none}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.pick-btn{appearance:none;border:1.5px solid var(--rose);background:var(--paper);color:var(--ink);font:700 15px var(--font-body);padding:14px 10px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;gap:3px;align-items:center}
+.pick-btn small{font-weight:400;font-size:12px;color:var(--muted)}
+.pick-btn[aria-pressed="true"]{background:var(--deep);border-color:var(--deep);color:#fff}
+.pick-btn[aria-pressed="true"] small{color:#fbe6ec}
+.pick-btn:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.sched{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px;text-align:left}
+.sched li{display:flex;gap:14px;align-items:baseline;background:var(--paper);border-radius:14px;padding:12px 14px}
+.sched b{color:var(--deep);font-variant-numeric:tabular-nums;min-width:46px}
+.sched span{display:flex;flex-direction:column}
+.sched small{color:var(--muted);font-size:12px}
+.pick-note{margin-top:14px;font-size:14px;color:var(--ink)}
 .stack{display:grid;gap:0}
 .memories{margin-top:30px;text-align:center}
 .memories>.script{font-size:42px}
@@ -118,6 +138,11 @@ p{margin:0}
 <body>
 
 <div class="petals" id="petals" aria-hidden="true"></div>
+
+<script>
+// Galerías: si una foto no carga se quita; si no carga ninguna, se ve la ilustración
+function galErr(img){ const g=img.parentNode; img.remove(); if(!g.querySelector("img")){ const w=g.parentNode; w.nextElementSibling.hidden=false; w.remove(); } }
+</script>
 
 <main>
   <!-- Portada -->
@@ -163,6 +188,7 @@ p{margin:0}
       <p class="eyebrow">Tu regalo de cumpleaños</p>
       <h1 class="script">Paula,</h1>
       <p class="serif">esto es lo que vamos a hacer juntos</p>
+      <p class="date-pill">Domingo 15 de noviembre · Valencia</p>
     </div>
 
     <div class="pol-row fade" style="animation-delay:.05s">
@@ -172,7 +198,8 @@ p{margin:0}
 
     <div class="stack">
       <article class="exp fade" style="animation-delay:.1s">
-        <svg viewBox="0 0 400 210" role="img" aria-label="Ilustración de bombones y una tableta de chocolate">
+        <div class="gal-wrap"><div class="gal"><img src="https://www.tallerdechocolate.es/wp-content/uploads/2024/03/ChIJcTFx-3hJYA0RJ29r_yQNe5I_89db1c81cdf42391a9a624c2e56270aa.jpg" alt="Taller de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.tallerdechocolate.es/wp-content/uploads/2024/03/ChIJcTFx-3hJYA0RJ29r_yQNe5I_ad28f5eb414064a56b0f838904214a88.jpg" alt="Taller de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.tallerdechocolate.es/wp-content/uploads/2024/03/ChIJcTFx-3hJYA0RJ29r_yQNe5I_079f5c24d83b8ef4160a9daa8598373d.jpg" alt="Taller de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.tallerdechocolate.es/wp-content/uploads/2024/03/ChIJcTFx-3hJYA0RJ29r_yQNe5I_cd4dea35aedf1c52b728c968f593178e.jpg" alt="Taller de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.tallerdechocolate.es/wp-content/uploads/2022/07/pastry-cook-doing-presents-from-sweets-and-fruits.jpg" alt="Taller de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"></div><span class="swipe">desliza →</span></div>
+        <svg class="fallback" hidden viewBox="0 0 400 210" role="img" aria-label="Ilustración de bombones y una tableta de chocolate">
           <rect width="400" height="210" fill="#f8d7e0"/>
           <circle cx="330" cy="40" r="70" fill="#fbe6ec"/>
           <circle cx="60" cy="190" r="60" fill="#fbe6ec"/>
@@ -211,7 +238,7 @@ p{margin:0}
         <div class="exp-body">
           <span class="tag">Primera parada</span>
           <h3>Taller y cata de chocolate</h3>
-          <p>Vamos a hacer el <b>ChocoMaster</b>: un viaje por los países que producen el mejor cacao del mundo sin salir de Alicante, de la mano de José Luis, un chocolatero con más de 20 años de experiencia que se lo pasa en grande enseñando.</p>
+          <p>Vamos a hacer el <b>ChocoMaster</b>: un viaje por los países que producen el mejor cacao del mundo sin salir de Valencia, de la mano de un chocolatero con más de 20 años de experiencia que se lo pasa en grande enseñando.</p>
           <p>Vas a probar chocolates que los expertos consideran de los mejores del mundo, aprender a catarlos como una profesional y hacer tus propias creaciones de pastelería.</p>
           <div class="chips"><span class="chip">1 h 45 min</span><span class="chip">+20 chocolates</span><span class="chip">4 elaboraciones</span></div>
           <ul>
@@ -222,8 +249,8 @@ p{margin:0}
           </ul>
           <p class="note"><b>No te olvides:</b> trae un táper para llevarte tus creaciones.</p>
           <div class="place">
-            <span>Calle México 18, Alicante</span>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Calle+M%C3%A9xico+18%2C+03008+Alicante" target="_blank" rel="noopener">Ver en el mapa</a>
+            <span>Hotel NH Las Artes · Av. de l'Institut Obrer de València 28, Valencia</span>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Hotel+NH+Las+Artes+Valencia" target="_blank" rel="noopener">Ver en el mapa</a>
           </div>
         </div>
       </article>
@@ -231,7 +258,8 @@ p{margin:0}
       <p class="and" aria-hidden="true">y después…</p>
 
       <article class="exp fade" style="animation-delay:.2s">
-        <svg viewBox="0 0 400 210" role="img" aria-label="Ilustración de un campamento de safari al atardecer con una acacia y una fogata">
+        <div class="gal-wrap"><div class="gal"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-ubud_01_CARD_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-sminyak_01_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-ubud_02_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-sminyak_02_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-ubud_03_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"><img src="https://www.volteretarestaurante.com/images/valencia-bali/valencia-bali-sminyak_03_1140w.webp" alt="Voltereta Bali, Valencia" loading="lazy" referrerpolicy="no-referrer" onerror="galErr(this)"></div><span class="swipe">desliza →</span></div>
+        <svg class="fallback" hidden viewBox="0 0 400 210" role="img" aria-label="Ilustración de un campamento de safari al atardecer con una acacia y una fogata">
           <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8d7e0"/><stop offset="1" stop-color="#fde6d8"/></linearGradient></defs>
           <rect width="400" height="210" fill="url(#sky)"/>
           <circle cx="270" cy="120" r="46" fill="#f9c9b6"/>
@@ -267,19 +295,19 @@ p{margin:0}
           <circle cx="345" cy="40" r="2.5" fill="#fffafb"/><circle cx="370" cy="64" r="2" fill="#fffafb"/><circle cx="40" cy="30" r="2" fill="#fffafb"/>
         </svg>
         <div class="exp-body">
-          <span class="tag">Segunda parada · a comer</span>
-          <h3>Voltereta Tanzania</h3>
-          <p>¿Te acuerdas de la pregunta de África? Pues no era casualidad. Nos vamos de safari a Tanzania… en pleno centro de Alicante.</p>
-          <p>Voltereta es un restaurante ambientado como un campamento en la sabana, con cabañas, rincones de picnic y fogatas, donde cada plato trae sabores que han ido descubriendo viajando por el mundo. Es uno de los sitios más bonitos de la ciudad, y comer ahí se siente como estar de viaje.</p>
-          <div class="chips"><span class="chip">Campamento safari</span><span class="chip">Cocina viajera</span><span class="chip">Centro de Alicante</span></div>
+          <span class="tag">Segunda parada · comida o cena</span>
+          <h3>Voltereta Bali</h3>
+          <p>¿Te acuerdas de los monos? Pues no era broma. Nos vamos a Bali… en plena Gran Vía de Valencia.</p>
+          <p>Voltereta Bali es un restaurante inmersivo que te mete de lleno en la isla: la zona Ubud Camp parece una selva, y la Villa Seminyak recrea una villa balinesa. La cocina mezcla sabores asiáticos y mediterráneos en platos para compartir. Es de los sitios más bonitos de Valencia, y comer ahí se siente como estar de viaje.</p>
+          <div class="chips"><span class="chip">Ubud Camp</span><span class="chip">Villa Seminyak</span><span class="chip">Fusión asiática</span></div>
           <ul>
-            <li>Una comida en uno de los restaurantes más especiales de Alicante</li>
+            <li>Una comida o cena en uno de los restaurantes más especiales de Valencia</li>
             <li>Un ambiente para hacernos mil fotos</li>
             <li>Y yo enfrente de ti, que también cuenta</li>
           </ul>
           <div class="place">
-            <span>C/ Navas 33, Alicante</span>
-            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Voltereta+Tanzania+Calle+Navas+33+Alicante" target="_blank" rel="noopener">Ver en el mapa</a>
+            <span>Gran Vía Marqués del Turia 59, Valencia</span>
+            <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Voltereta+Bali+Gran+V%C3%ADa+Marqu%C3%A9s+del+Turia+59+Valencia" target="_blank" rel="noopener">Ver en el mapa</a>
           </div>
         </div>
       </article>
@@ -297,8 +325,21 @@ p{margin:0}
     </div>
 
     <div class="choose fade" style="animation-delay:.35s">
-      <p class="script">Tú eliges el día</p>
-      <p style="margin-top:6px">Mira tu calendario, dime qué día te viene mejor y yo me encargo de reservarlo todo. Lo único que tienes que hacer es venir con hambre.</p>
+      <p class="script">Tú eliges</p>
+      <p style="margin-top:6px">El taller puede ser por la mañana o por la tarde. ¿Cómo lo quieres?</p>
+      <div class="pick" role="group" aria-label="Elige el plan">
+        <button type="button" class="pick-btn" id="pick-dia" aria-pressed="false">Plan de día<small>taller + comida</small></button>
+        <button type="button" class="pick-btn" id="pick-noche" aria-pressed="false">Plan de tarde<small>taller + cena</small></button>
+      </div>
+      <ol class="sched" id="sched-dia" hidden>
+        <li><b>12:30</b><span>Taller y cata de chocolate<small>hasta las 14:15</small></span></li>
+        <li><b>14:45</b><span>Comida en Voltereta Bali</span></li>
+      </ol>
+      <ol class="sched" id="sched-noche" hidden>
+        <li><b>19:00</b><span>Taller y cata de chocolate<small>hasta las 21:15</small></span></li>
+        <li><b>21:45</b><span>Cena en Voltereta Bali</span></li>
+      </ol>
+      <p class="pick-note" id="pick-note">Dímelo y yo me encargo de reservarlo todo.</p>
     </div>
 
     <div class="card sign fade" style="animation-delay:.4s">
@@ -313,14 +354,14 @@ p{margin:0}
 // ===== Preguntas del test (a = posición de la correcta, empezando en 0) =====
 const QUESTIONS = [
   { q: "¿Qué es lo que más te gusta comer?", opts: ["Ensalada", "Nocilla", "Sushi", "¡CHOCOLATEEEE!"], a: 3, cap: "mi golosa" },
-  { q: "¿Qué país está en África?", opts: ["Vietnam", "India", "Siria", "Tanzania"], a: 3, cap: "aventureros" },
+  { q: "¿En qué sitio vas a poder jugar con todos los monos que quieras?", opts: ["Bali", "Nueva York", "Tanzania", "Australia"], a: 0, cap: "aventureros" },
   { q: "¿A dónde nos vamos a ir de viaje?", opts: ["A Bali", "A Canarias", "Todas son correctas", "A Corea del Sur"], a: 2, cap: "próximo destino" },
   { q: "¿Cuánto te quiere tu novio?", opts: ["Mucho", "Muchísimo", "Infinito", "De aquí a la luna y volver, dándole la vuelta 100 veces"], a: 3, cap: "muchísimo más" }
 ];
 // Fotos del test: pon aquí la imagen de cada pregunta cuando las tengas (null = marco vacío)
 const QUIZ_PHOTOS = [["cerezas","50% 55%"], ["ski","50% 55%"], ["lisboa-buganvilla","50% 70%"], ["beso-gala","55% 35%"]];
 const WRONG = ["Casi… inténtalo otra vez", "Mmm, no. Piénsalo bien", "¡Esa no es! Otra oportunidad"];
-const KEY = "paula-regalo-v2";
+const KEY = "paula-regalo-v3";
 
 const $ = id => document.getElementById(id);
 let i = 0;
@@ -362,6 +403,13 @@ function unlocked(){
   show("unlock");
   setTimeout(()=>$("envelope").classList.add("open"), 300);
 }
+
+function pick(which){
+  ["dia","noche"].forEach(k=>{ $("pick-"+k).setAttribute("aria-pressed", k===which); $("sched-"+k).hidden = k!==which; });
+  $("pick-note").textContent = which==="dia" ? "Plan de día elegido. Dímelo y lo reservo todo ♥" : "Plan de tarde elegido. Dímelo y lo reservo todo ♥";
+}
+$("pick-dia").onclick=()=>pick("dia"); $("pick-noche").onclick=()=>pick("noche");
+
 $("start").onclick = () => { i = 0; show("quiz"); renderQ(); };
 $("reveal").onclick = () => show("plan");
 
